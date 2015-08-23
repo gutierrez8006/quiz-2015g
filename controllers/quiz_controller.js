@@ -1,17 +1,24 @@
 var models = require('../models/models.js');
+//GET /quizes
+exports.index = function(req, res){
+	models.Quiz.findAll().then(function(quizes){
+		res.render('layout', {quizes: quizes, body: 'preguntas'});
+	})
+};
+
 // GET /quizes/question
-exports.question = function(req, res){
-	models.Quiz.findAll().then(function(quiz){
-		res.render('layout', {pregunta: quiz[0].pregunta, body: 'question'});
+exports.show = function(req, res){
+	models.Quiz.findById(req.params.quizId).then(function(quiz){
+		res.render('layout', {quiz: quiz, body: 'show'});
 	});
 };
 
 exports.answer = function(req, res){
-	models.Quiz.findAll().then(function(quiz){
-	if (req.query.respuesta === quiz[0].respuesta ){
-		res.render('layout', {respuesta: 'Correcto', body: 'answer'});
+	models.Quiz.findById(req.params.quizId).then(function(quiz){
+	if (req.query.respuesta === quiz.respuesta ){
+		res.render('layout', {quiz: quiz, respuesta: 'Correcto', body: 'answer'});
 	}else{
-		res.render('layout', {respuesta: 'Incorrecto', body: 'answer'});
+		res.render('layout', {quiz: quiz, respuesta: 'Incorrecto', body: 'answer'});
 	}
 	});
 

@@ -20,19 +20,21 @@
       </header>
       <nav class="main" id="n1" role="navigation">
         <span><a href="/">Inicio</a></span>
-        <span><a href="/quizes/question">Preguntas</a></span>
+        <span><a href="/quizes">Preguntas</a></span>
       </nav>
       <section class="main" id="s1">
          <% if(body == 'body'){%>
             <% include index %>
          <%} %>
-         <% if(body == 'question'){%>
-            <% include quizes/question %>
+         <% if(body == 'show'){%>
+            <% include quizes/show %>
          <%} %>
          <% if(body == 'answer'){%>
             <% include quizes/answer %>
          <%} %>
-
+         <% if(body == 'preguntas'){%>
+            <% include quizes/index %>
+         <%} %>
       </section>
       <footer class="main" id="f1">
           <a href="http://es.wikipedia.org/wiki/Quiz">Que es un Quiz?</a>
